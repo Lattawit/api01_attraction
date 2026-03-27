@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-app.use('/attractions', attractionsRoutes);
+app.use('/api/attractions', attractionsRoutes);
 
 // error handler
 app.use((err, req, res, next) => {
