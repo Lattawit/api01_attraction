@@ -10,6 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ root route (IMPORTANT for Vercel)
+app.get('/', (req, res) => {
+  res.json({ message: 'Attraction API is running 🚀' });
+});
+
 // routes
 app.use('/api/attractions', attractionsRoutes);
 
@@ -19,7 +24,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// start server (เฉพาะตอน dev)
+// start server (dev only)
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 3333;
   app.listen(PORT, () => {
@@ -27,5 +32,4 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// export สำหรับ Vercel
 module.exports = app;
